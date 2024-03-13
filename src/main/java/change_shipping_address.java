@@ -12,22 +12,34 @@ public class change_shipping_address {
 
 
 
-        // Set the path to the ChromeDriver executable
-        // System.setProperty("webdriver.chrome.driver", "/Users/priyakumari/Downloads/chromedriver");
-
         // Create a new instance of the ChromeDriver
         WebDriver driver = new ChromeDriver();
 
         // Navigate to the website
         driver.get("https://www.amazon.in/");
-        Thread.sleep(10000);
+        Thread.sleep(8000);
         // Maximize the browser window
         driver.manage().window().maximize();
+
+        driver.findElement(By.xpath("//span[@id='nav-link-accountList-nav-line-1']")).click();
+
+        //sign-in page -> number/email field
+        driver.findElement(By.xpath("//input[@type='email']")).sendKeys("7282071972");
+
+        //hit continue
+        driver.findElement(By.xpath("//input[@id='continue']")).click();
+
+        //password field on next page
+        driver.findElement(By.xpath("//input[@type='password']")).sendKeys("babli@5050");
+
+        //hit sign-in button
+        driver.findElement(By.xpath("//input[@id='signInSubmit']")).click();
 
 
 
         WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
-        searchBox.sendKeys("Reynolds ROLLER POINT Pen R7 1 CT BL- BLUE ");
+
+        searchBox.sendKeys("Reynolds ROLLER POINT Pen R7 1 CT BL- BLUE | Stylish Metal Clip Premium Look Rollerball Point Pen for Men");
         //searchBox.submit();
         searchBox.sendKeys(Keys.ENTER);
 
@@ -60,26 +72,48 @@ public class change_shipping_address {
         addToCartButton.click();
 
         // Wait for the cart to update after adding the item
-        // (You may need to use explicit or implicit waits here)
+        // (You may need to use explicit or implicit waits here) I am using thread.sleep() which is a kind of static wait in java
+
+        // Navigate to the cart page
+        driver.get("https://www.amazon.in/gp/cart/view.html/ref=nav_cart");
+        // here amazon ask for the login credentials, use no= 7282071972 password= babli@5050
+
+        //proceed to checkout on cart page
+        driver.findElement(By.xpath("//input[@name='proceedToRetailCheckout']")).click();
 
 
 
-        Thread.sleep(3000);
 
 
-        //-------- changing the pincode of delivery address only , as for editing/changing the shipping address authentication/login credentials are needed.
-
-        // try accessing the web element responsible for updating Location
-        driver.findElement(By.xpath("//span[@id='glow-ingress-line2']")).click();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
+        //add new address
+        driver.findElement(By.xpath("//a[@id='add-new-address-popover-link']")).click();
 
 
+        //field address in popup
+        driver.findElement(By.xpath("//input[@id='address-ui-widgets-enterAddressFullName']")).sendKeys("PRIYA DEVI");
 
-        // selecting the textbox for entering the pincode
-        driver.findElement(By.xpath("//input[@aria-label='or enter an Indian pincode']")).sendKeys("124506");
-        Thread.sleep(1000);
-        // here amazon ask for the login credentials , thereby leaving this scenario here only
+        //Field address in popup
+        driver.findElement(By.xpath("//input[@id='address-ui-widgets-enterAddressPhoneNumber']")).sendKeys("7282071972");
 
+        //fill posal code
+        driver.findElement(By.xpath("//input[@id='address-ui-widgets-enterAddressPostalCode']")).sendKeys("110002");
+
+
+        //flat details - address-ui-widgets-enterAddressLine1
+        driver.findElement(By.xpath("//input[@id='address-ui-widgets-enterAddressLine1']")).sendKeys("PG blue sea greenwood city");
+
+
+        //more area details - address-ui-widgets-enterAddressLine2
+        driver.findElement(By.xpath("//input[@id='address-ui-widgets-enterAddressLine2']")).sendKeys("Block Asec 45 Sushant Lok Phase 1, Sector 43");
+        Thread.sleep(5000);
+
+        //Enter city
+        //driver.findElement(By.xpath("//input[@id='address-ui-widgets-enterAddressCity']")).sendKeys("");
+
+        // hit use this address
+        driver.findElement(By.xpath("//input[@aria-labelledby='address-ui-widgets-form-submit-button-announce']")).click();
+        Thread.sleep(5000);
         driver.quit();
 
 

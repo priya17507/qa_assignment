@@ -12,15 +12,12 @@ public class add_element_to_cart {
 
 
 
-        // Set the path to the ChromeDriver executable
-        // System.setProperty("webdriver.chrome.driver", "/Users/priyakumari/Downloads/chromedriver");
-
         // Create a new instance of the ChromeDriver
         WebDriver driver = new ChromeDriver();
 
         // Navigate to the website
         driver.get("https://www.amazon.in/");
-        Thread.sleep(10000);
+        Thread.sleep(8000);
         // Maximize the browser window
         driver.manage().window().maximize();
 
@@ -62,9 +59,21 @@ public class add_element_to_cart {
         // Wait for the cart to update after adding the item
         // (You may need to use explicit or implicit waits here) I am using thread.sleep() which is a kind of static wait in java
 
+        // Navigate to the cart page
+        driver.get("https://www.amazon.in/gp/cart/view.html/ref=nav_cart");
 
 
-        Thread.sleep(3000);
+        //Assert if the item is successfully added to the cart
+        WebElement cartItem = driver.findElement(By.xpath("//img[contains(@alt,'Reynolds ROLLER POINT Pen R7 1 CT BL- BLUE')]"));
+        if (cartItem.isDisplayed()) {
+            System.out.println("Item successfully added to cart!");
+        } else {
+            System.out.println("Failed to add item to cart!");
+        }
+
+
+
+        Thread.sleep(1000);
 
 
         driver.quit();
