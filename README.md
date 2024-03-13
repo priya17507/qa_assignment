@@ -2,7 +2,7 @@ Configuration:-
 ----------------------------------------------------------------
 (1) Install java and set the java Hiome Path in System Variables
 (2) Install Eclipse/IntelliJ & create new maven project with Selenium Dependecies. (Its present in the pom.xml file that i have provided)
-(3) You can add jar file also if you are using intelliJ
+(3) You can add jar file also if you are using intelliJ (File > Project Structure > Module > dependencies > add here the jar file i have shared)
 
 
 
