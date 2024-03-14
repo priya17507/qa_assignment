@@ -20,7 +20,7 @@ public class remove_element_from_cart {
 
         // Navigate to the website
         driver.get("https://www.amazon.in/");
-        Thread.sleep(10000);
+        Thread.sleep(8000);
         // Maximize the browser window
         driver.manage().window().maximize();
 
@@ -64,14 +64,28 @@ public class remove_element_from_cart {
 
 
 
-        Thread.sleep(3000);
+        Thread.sleep(1000);
 
         //--------------------------removing element from the cart
         driver.findElement(By.xpath("//span[@id='nav-cart-count']")).click();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
 
         driver.findElement(By.xpath("//input[@class='a-color-link']")).click();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
+
+        // Navigate to the cart page
+        driver.get("https://www.amazon.in/gp/cart/view.html/ref=nav_cart");
+
+
+        // Check if the cart is empty
+        WebElement emptyCartMessage = driver.findElement(By.xpath("//div[@class='a-row sc-your-amazon-cart-is-empty']/h2"));
+        if (emptyCartMessage.isDisplayed()) {
+            System.out.println("Cart is empty. Item successfully removed!");
+        } else {
+            System.out.println("Item still present in cart. Removal failed!");
+        }
+
+
 
 
         driver.quit();
